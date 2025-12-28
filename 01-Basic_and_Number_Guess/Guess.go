@@ -1,20 +1,30 @@
 package main
 
-import ("fmt")
+import (
+	"fmt"
+	"math/rand" // Contains functions for generating pseudo-random numbers.
+)
+
+const defaultMin = 1
+const defaultMax = 100
 
 func main() {
-	var start_number int
 	var current_guess int
+	var difference string
 
-	fmt.Println("Bitte gebe die Nummer ein die erraten werden soll: ")
-	fmt.Scan(&start_number)
+	start_number := rand.Intn(defaultMax - defaultMin) + defaultMin
 
 	for current_guess != start_number {
 		fmt.Println("Bitte gebe deine aktuelle Schätzung ein: ")
 		fmt.Scan(&current_guess)
 
 		if current_guess != start_number {
-			fmt.Println("Leider war die Schätzung nicht richtig. ")
+			if current_guess < start_number {
+				difference = "NIEDRIG"
+			} else if current_guess > start_number {
+				difference = "HOCH"
+			}
+			fmt.Printf("Leider war die Schätzung nicht richtig. Deine Zahl war leider zu %v. \n", difference)
 		}
 	}
 
